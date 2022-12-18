@@ -1,0 +1,26 @@
+install.packages("dplyr") 
+install.packages("withr")
+library(dplyr)
+sdata <- read.csv("MechaCar_mpg.csv", header = TRUE, sep = ",")
+sdata
+linear = lm(vehicle_length~mpg, data=sdata)
+summary(linear)
+
+install.packages("tidyr")
+install.packages("tidyverse") 
+library(tidyverse)
+Coil <- read.csv("Suspension_Coil.csv", header = TRUE, sep = ",")
+Coil
+total_summary = Coil %>% summarize(Mean = mean(PSI, na.rm = TRUE), Median = median(PSI, na.rm = TRUE), Variance = var(PSI, na.rm = TRUE), SD = sd(PSI, na.rm = TRUE))
+total_summary  
+
+
+lot_summary = Coil %>% group_by(Manufacturing_Lot) %>% summarize(Mean = mean(PSI, na.rm = TRUE), Median = median(PSI, na.rm = TRUE), Variance = var(PSI, na.rm = TRUE), SD = sd(PSI, na.rm = TRUE))
+lot_summary
+
+
+t.test(Coil$PSI,mu=1500)
+
+
+t.test(subset(Coil,Manufacturing_Lot == "Lot1")$PSI,mu=1500)
+
